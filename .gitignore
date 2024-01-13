@@ -1,0 +1,6 @@
+# Ignore Environment
+/venv
+
+# Ignore Database
+/simple_chat/db.sqlite3
+
