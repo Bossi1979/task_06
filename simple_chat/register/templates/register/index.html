@@ -1,1 +1,27 @@
-<h1>Register</h1>
+{% extends 'main.html' %}
+
+{% block content %}
+  <div class="loginContent">
+    <form action="/register/" method="POST" class="loginForm">
+      {% csrf_token %}
+      <h4>Konto erstellen</h4>
+      <div class="mdl-textfield mdl-js-textfield">
+        <input type="hidden" name="redirect" value="{{ redirect }}" autocomplete="off"/>
+        <input class="mdl-textfield__input" type="text" id="sample1" name="username" />
+        <label class="mdl-textfield__label" for="sample1">Benutzername</label>
+      </div>
+      <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="password" id="sample2" name="password" autocomplete="off" />
+        <label class="mdl-textfield__label" for="sample2">Passwort</label>
+      </div>
+      <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="password" id="sample3" name="c_password" autocomplete="off" />
+        <label class="mdl-textfield__label" for="sample3">Passwort bestätigen</label>
+      </div>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Einloggen</button>
+      <p style="text-align: center;">
+        Um zum Login zurück zu gelangen klicken Sie <a href="/login" class="link">hier</a>
+      </p>
+    </form>
+  </div>
+{% endblock %}
