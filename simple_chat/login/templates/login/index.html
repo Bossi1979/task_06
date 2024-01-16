@@ -2,22 +2,31 @@
 
 {% block content %}
   <div class="loginContent">
-    <form action="/login/" method="POST" class="loginForm">
+    <form onsubmit="login(); return false;" class="loginForm">
       {% csrf_token %}
       <h4>Anmeldung</h4>
-      <div class="mdl-textfield mdl-js-textfield">
-        <input type="hidden" name="redirect" value="{{ redirect }}" autocomplete="off"/>
-        <input class="mdl-textfield__input" type="text" id="sample1" name="username" />
+      <div class="mdl-textfield mdl-js-textfield usernameInput">
+        <input type="hidden" name="redirect" value="{{ redirect }}" autocomplete="off" />
+        <input class="mdl-textfield__input" type="text" id="username" name="username" value="{{ response.username }}" pattern="[a-zA-Z0-9]+" minlength="5" maxlength="20" required onkeyup="checkEnteredValuesUsername()" />
         <label class="mdl-textfield__label" for="sample1">Benutzername</label>
+
+        <span class="warningUsername" id="uWarning">Warning</span>
       </div>
-      <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="password" id="sample2" name="password" autocomplete="off" />
+      <div class="mdl-textfield mdl-js-textfield passwordInput">
+        <input class="mdl-textfield__input" type="password" id="password" name="password" autocomplete="off" minlength="" maxlength="32" required onkeyup="checkEnteredValuesPassword()" />
         <label class="mdl-textfield__label" for="sample2">Passwort</label>
+        <span class="warningPassword" id="pWarning">Warning</span>
+        <span class="mainLoginWarning" id="mainLoginWarning"></span>
       </div>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Einloggen</button>
+
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored loginBtn" type="submit" disabled="true" id="sendBtn">
+        Einloggen
+      </button>
+      
       <p>
         Um ein Konto zu erstellen klicken Sie <a href="/register" class="link">hier</a>
       </p>
+      
     </form>
   </div>
 {% endblock %}

@@ -1,16 +1,18 @@
-body{
+body {
     margin: 0px;
     user-select: none !important;
     background-color: #ECEEFE !important;
 }
 
-.page-content{
+.page-content {
     display: flex;
     height: 100%;
     width: 100%;
 }
 
-.loginContent{
+
+/* Login */
+.loginContent {
     display: flex;
     justify-content: center;
     position: absolute;
@@ -19,7 +21,8 @@ body{
     height: 100%;
     width: 100%;
 }
-.loginForm{
+
+.loginForm {
     display: flex;
     align-items: center;
     width: 300px;
@@ -32,52 +35,86 @@ body{
     box-shadow: 0px 6px 10px 0px #00000033;
 }
 
-.loginForm p{
+.loginForm p {
     padding: 20px 0px;
 }
 
-.loginForm button{
+.loginForm button {
     margin: 20px 0px;
 }
 
-.loginForm h4{
+.loginForm h4 {
     color: #3F51B5;
     padding: 20px 0px;
 }
 
-p{
+p {
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
 
-h4{
+h4 {
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
 
-.link{
-    color:#3F51B5;
+.link {
+    color: #3F51B5;
 }
 
+/* login validation Warnings */
 
+.usernameInput {
+    position: relative;
+}
+
+.warningUsername {
+    display: none;
+    font-size: 10px;
+    position: absolute;
+    color: crimson;
+}
+
+.passwordInput {
+    position: relative;
+}
+
+.warningPassword {
+    display: none;
+    font-size: 10px;
+    position: absolute;
+    color: crimson;
+}
 
 .material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+    font-variation-settings:
+        'FILL'0,
+        'wght'400,
+        'GRAD'0,
+        'opsz'24
 }
 
-.logoutBtn{
-    color: white; 
-    width: 20px; 
-    height: 20px; 
+.mainLoginWarning{
+    display: flex;
+    font-size: 10px;
+    top: 66px;
+    position: absolute;
+    color: crimson;
+}
+
+
+
+/* header */
+
+.logoutBtn {
+    color: white;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
 }
 
 
-.logoutBtn:hover{
+.logoutBtn:hover {
     transition: color 150ms ease-in-out;
     color: crimson;
 }
@@ -88,3 +125,133 @@ h4{
     gap: 5px;
 }
 
+
+/* Chat */
+
+.chatContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px;
+    background: white;
+    box-sizing: border-box;
+    box-shadow: 0px 6px 10px 0px #00000033;
+}
+
+.chatHeader {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 0px 10px;
+    overflow: hidden;
+}
+
+.divider {
+    width: calc(100% - 20px);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 0px 10px;
+}
+
+.chatMessages {
+    display: flex;
+    height: calc(100% - 158px);
+    padding: 10px 10px;
+    overflow: hidden;
+}
+
+
+.messageInput {
+    display: flex;
+    position: absolute;
+    bottom: 38px;
+    left: 0px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: 80px;
+    gap: 5px;
+}
+
+.sendBtn {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    height: 20px;
+    text-transform: none !important;
+}
+
+.messageInput input {
+    width: 250px;
+}
+
+
+/* Loading animation */
+.loading{
+    display: none; 
+    position: absolute;
+    justify-content: center; 
+    align-items: center;
+    flex-direction: column; 
+    height: 100vh; 
+    width: 100%; 
+    background-color: rgba(0, 0, 0, 0.5); 
+    color: white; 
+    z-index: 100; 
+}
+
+.loadingPoint1{
+    animation: loadingPoint1 3s linear infinite;
+}
+
+.loadingPoint2{
+    animation: loadingPoint2 3s linear infinite;
+}
+
+.loadingPoint3{
+    animation: loadingPoint3 3s linear infinite;
+}
+
+@keyframes loadingPoint1 {
+    0% {
+        opacity: 0;
+    }
+    33% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes loadingPoint2 {
+    0% {
+        opacity: 0;
+    }
+    33%{
+        opacity: 0;
+    }
+    66% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes loadingPoint3 {
+    0% {
+        opacity: 0;
+    }
+    33%{
+        opacity: 0;
+    }
+    66% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
