@@ -144,8 +144,8 @@ function deactivatedLoadingScreen() {
 function resetForm() {
     usernameValid = false;
     passwordValid = false;
-    username.value = '';
-    password.value = '';
+    // username.value = undefined;
+    // password.value = undefined;
     sendBtn.disabled = true;
 }
 

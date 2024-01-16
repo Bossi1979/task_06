@@ -184,7 +184,7 @@ h4 {
 }
 
 .messageInput input {
-    width: 250px;
+    width: calc(100% - 62px);
 }
 
 
