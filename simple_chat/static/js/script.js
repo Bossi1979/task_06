@@ -156,17 +156,43 @@ function checkEnteredValuesUsername() {
     usernameValid = false;
     const allowedCharacters = /[^a-zA-Z0-9\s]/;
     username.value = username.value.trim();
-    if (allowedCharacters.test(username.value)) {
-        uWarning.style.display = 'flex';
-        uWarning.innerHTML = '*Es sind keine Sonderzeichen erlaubte!';
-    } else if (username.value.length < 5) {
-        uWarning.style.display = 'flex';
-        uWarning.innerHTML = '*Der Benutzername muss mindestens 5 Zeichen lang sein!';
-    } else {
-        uWarning.style.display = 'none';
-        usernameValid = true;
-    }
+    if (allowedCharacters.test(username.value)) setWarningUsernameSpecialCharacters();
+    else if (username.value.length < 5) setWarningUsernameToShortLength()
+    else disableUsernameWarning();
     setBtnDisabledValue();
+}
+
+
+/**
+ * The function sets a warning message for the username field if it contains special characters.
+ * 
+ * @ returns {void}
+ */
+function setWarningUsernameSpecialCharacters() {
+    uWarning.style.display = 'flex';
+    uWarning.innerHTML = '*Es sind keine Sonderzeichen erlaubte!';
+}
+
+
+/**
+ * The function sets a warning message for the username field if it is too short.
+ * 
+ * @ returns {void}
+ */
+function setWarningUsernameToShortLength() {
+    uWarning.style.display = 'flex';
+    uWarning.innerHTML = '*Der Benutzername muss mindestens 5 Zeichen lang sein!';
+}
+
+
+/**
+ * The function disables the display of a warning message for invalid usernames.
+ * 
+ * @ returns {void}
+ */
+function disableUsernameWarning() {
+    uWarning.style.display = 'none';
+    usernameValid = true;
 }
 
 
@@ -181,18 +207,44 @@ function checkEnteredValuesPassword() {
     passwordValid = false;
     const notAllowed = /[<>]/;
     const minLength = 6;
-    const maxLength = 32;
-    if (notAllowed.test(password.value)) {
-        pWarning.style.display = 'flex';
-        pWarning.innerHTML = '*Das Sonderzeichen < oder > ist nicht erlaubt!';
-    } else if (password.value.length < minLength) {
-        pWarning.style.display = 'flex';
-        pWarning.innerHTML = '*Das Passwort muss mindestens 6 Zeichen lang sein!';
-    } else {
-        pWarning.style.display = 'none';
-        passwordValid = true;
-    }
+    if (notAllowed.test(password.value)) setWarningForbiddenSpecialCharacters();
+    else if (password.value.length < minLength) setWarningPasswordToShortLength()
+    else disablePasswordWarning();
     setBtnDisabledValue();
+}
+
+
+/**
+ * The function sets a warning message and displays it if the special characters < or > are used.
+ * 
+ * @ returns {void}
+ */
+function setWarningForbiddenSpecialCharacters() {
+    pWarning.style.display = 'flex';
+    pWarning.innerHTML = '*Das Sonderzeichen < oder > ist nicht erlaubt!';
+}
+
+
+/**
+ * The function sets a warning message to be displayed if the password entered is too short.
+ * 
+ * @ returns {void}
+ */
+function setWarningPasswordToShortLength() {
+    pWarning.style.display = 'flex';
+    pWarning.innerHTML = '*Das Passwort muss mindestens 6 Zeichen lang sein!';
+}
+
+
+/**
+ * The function disables the display of a password warning and sets a variable to indicate that the
+ * password is valid.
+ * 
+ * @ returns {void}
+ */
+function disablePasswordWarning() {
+    pWarning.style.display = 'none';
+    passwordValid = true;
 }
 
 
