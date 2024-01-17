@@ -1,21 +1,43 @@
 {% extends 'main.html' %}
 
-
 {% block content %}
-
-<div class="chatContent">
+  <div class="chatContent">
     <header class="chatHeader">Channel XYZ</header>
     <div class="divider"></div>
-    <div class="chatMessages">
-        message
+    <div class="chatMessages" id="frontMessage">
+      {% for message in messages %}
+        {% if message.author.username == request.user.username %}
+          <div class="chatLoggedUserMessageOuter">
+            <div class="chatLoggedUserMessageMain">
+              <div class="chatLoggedUserMessageBubble">
+                <i>{{ message.text }}</i>
+              </div>
+              <div class="loggedUserMessageInfo">
+                <span class="grey">[{{ message.created_at }}]</span>
+                <span style="color: #3F51B5;"><b>{{ message.author.username }}</b></span>
+              </div>
+            </div>
+          </div>
+        {% elif message.author.username != request.user.username %}
+          <div class="chatOtherUserMessageOuter">
+            <div class="chatOtherUserMessageMain">
+              <div class="chatOtherUserMessageBubble">
+                <i>{{ message.text }}</i>
+              </div>
+              <div class="otherUserMessageInfo">
+                <span class="grey">[{{ message.created_at }}]</span>
+                <span style="color: #3F51B5;"><b>{{ message.author.username }}</b></span>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
     <div class="divider"></div>
-    <form class="messageInput">
-        <input type="text">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored sendBtn" type="submit">Abschicken</button>
+    <form class="messageInput" onsubmit="sendMessage(); return false;" method="POST">
+      {% csrf_token %}
+      <input type="text" id="messageInput" name="textmessage" />
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored sendBtn" type="submit">Abschicken</button>
     </form>
-</div>
-
-
-
+  </div>
 {% endblock %}

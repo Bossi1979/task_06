@@ -30,7 +30,6 @@ def login_form(request):
                 'url': '/chat/',
             }
            return JsonResponse(response_data)
-        #    return HttpResponseRedirect('/chat/')
        else:
            response_data = {
                 'error': '*Benutzername oder Passwort falsch',
@@ -39,3 +38,14 @@ def login_form(request):
 
     elif request.method == 'GET':
         return render(request, 'login/index.html', {'redirect': redirect})
+    
+    
+    
+def loginDataCorrect(request):
+    login(request, user)
+    response_data = {
+        'error': 'none',
+        'url': '/chat/',
+    }
+    return JsonResponse(response_data)
+    

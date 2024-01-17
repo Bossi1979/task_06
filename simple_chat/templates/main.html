@@ -29,6 +29,7 @@
           <div class="mdl-layout__header-row" style="justify-content: space-between;">
             <!-- Title -->
             <span class="mdl-layout-title title"><img src="{% static './img/simple.png' %}" style="height: 20px; width: 20px;" />WhatsChats</span>
+            <span class="mdl-layout-title" >Welcome, <span id="username">{{ request.user.username }}</span> !</span>
             <!-- Add spacer, to align navigation to the right -->
             {% comment %} <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->

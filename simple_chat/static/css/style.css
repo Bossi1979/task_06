@@ -27,8 +27,6 @@ body {
     align-items: center;
     width: 300px;
     height: fit-content;
-    /* gap: 20px; */
-    /* border: 1px black solid; */
     flex-direction: column;
     background-color: white;
     padding: 20px;
@@ -94,7 +92,7 @@ h4 {
         'opsz'24
 }
 
-.mainLoginWarning{
+.mainLoginWarning {
     display: flex;
     font-size: 10px;
     top: 66px;
@@ -146,6 +144,7 @@ h4 {
     height: 40px;
     padding: 0px 10px;
     overflow: hidden;
+    font-size: 24px;
 }
 
 .divider {
@@ -156,9 +155,70 @@ h4 {
 
 .chatMessages {
     display: flex;
+    flex-direction: column;
     height: calc(100% - 158px);
     padding: 10px 10px;
     overflow: hidden;
+    overflow-y: scroll;
+    gap: 10px;
+}
+
+.chatLoggedUserMessageOuter {
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.chatOtherUserMessageOuter{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.chatLoggedUserMessageMain {
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% - 20px);
+    min-width: 50%;
+}
+
+.chatOtherUserMessageMain{
+    display: flex;
+    flex-direction: column;
+    max-width: calc(100% - 20px);
+    min-width: 50%;
+}
+
+.chatLoggedUserMessageBubble {
+    text-align: start;
+    background-color: #3F51B5;
+    color: white;
+    border-top-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    padding: 1.2vw 24px;
+    font-size: 24px;
+}
+
+.chatOtherUserMessageBubble {
+    text-align: end;
+    background-color: #68C7BA;
+    color: black;
+    border-top-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    padding: 1.2vw 24px;
+    font-size: 24px;
+}
+
+.loggedUserMessageInfo {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.otherUserMessageInfo {
+    display: flex;
+    justify-content: flex-start;
 }
 
 
@@ -189,28 +249,28 @@ h4 {
 
 
 /* Loading animation */
-.loading{
-    display: none; 
+.loading {
+    display: none;
     position: absolute;
-    justify-content: center; 
+    justify-content: center;
     align-items: center;
-    flex-direction: column; 
-    height: 100vh; 
-    width: 100%; 
-    background-color: rgba(0, 0, 0, 0.5); 
-    color: white; 
-    z-index: 100; 
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    z-index: 100;
 }
 
-.loadingPoint1{
+.loadingPoint1 {
     animation: loadingPoint1 3s linear infinite;
 }
 
-.loadingPoint2{
+.loadingPoint2 {
     animation: loadingPoint2 3s linear infinite;
 }
 
-.loadingPoint3{
+.loadingPoint3 {
     animation: loadingPoint3 3s linear infinite;
 }
 
@@ -218,9 +278,11 @@ h4 {
     0% {
         opacity: 0;
     }
+
     33% {
         opacity: 1;
     }
+
     100% {
         opacity: 1;
     }
@@ -230,12 +292,15 @@ h4 {
     0% {
         opacity: 0;
     }
-    33%{
+
+    33% {
         opacity: 0;
     }
+
     66% {
         opacity: 1;
     }
+
     100% {
         opacity: 1;
     }
@@ -245,13 +310,20 @@ h4 {
     0% {
         opacity: 0;
     }
-    33%{
+
+    33% {
         opacity: 0;
     }
+
     66% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
+}
+
+::-webkit-scrollbar{
+    width: 0px;
 }

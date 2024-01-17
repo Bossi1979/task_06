@@ -142,3 +142,105 @@ async function getToken() {
     let token = tokenField[0].value;
     return token;
 }
+
+
+// Message hinzufügen
+
+let responseM;
+let responseStringM;
+let counter = 0;
+let json;
+
+
+/**
+ * Sends a POST request to the chat server to save the new message.
+ * Get a JSON response with the saved message Data.
+ * 
+ * @returns {Promise<void>} A Promise that resolves once the message is sent.
+ */
+async function sendMessage() {
+    let message = messageInput.value;
+    addNewMessage(message);
+    let fd = getFormDataM();
+    try {
+        responseM = await fetch('/chat/', {
+            method: 'POST',
+            body: fd
+        });
+        responseStringM = await responseM.json();
+        json = await JSON.parse(responseStringM);
+        responseReceivedM(json.fields.text);
+    } catch (e) {
+        console.error('An error occurred', e);
+    }
+}
+
+
+/**
+ * Constructs FormData object with message and CSRF token.
+ * 
+ * @returns {FormData} A FormData object containing message and CSRF token.
+ */
+function getFormDataM() {
+    let data = new FormData();
+    tokenField = document.getElementsByName('csrfmiddlewaretoken');
+    let token = tokenField[0].value;
+    data.append('textmessage', messageInput.value);
+    data.append('csrfmiddlewaretoken', token);
+    messageInput.value = '';
+    return data;
+}
+
+
+/**
+ * Generates a timestamp string in the format '[Month. Day, Year] :'.
+ * 
+ * @returns {string} A string representing the generated timestamp.
+ */
+function getTimestamp() {
+    newDate = new Date();
+    mouth = newDate.toString().slice(4, 7);
+    day = newDate.getDate();
+    year = newDate.getFullYear();
+    timeStampString = '[' + mouth + '. ' + day + ', ' + year + '] ';
+    return timeStampString;
+}
+
+
+/**
+ * Adds a new message with a timestamp to the Frontend element.
+ * 
+ * @param {string} message - The message to be displayed.
+ */
+function addNewMessage(message) {
+    const messageElement = document.createElement('div');
+    messageElement.innerHTML += `
+    <div class="chatLoggedUserMessageOuter">
+        <div class="chatLoggedUserMessageMain">
+        <div class="chatLoggedUserMessageBubble">
+            <i>${message}</i>
+        </div>
+        <div class="loggedUserMessageInfo">
+            <span class="grey">[${getTimestamp()}]</span> 
+            <span style="color: #3F51B5;"><b>${username.innerHTML}</b></span>
+        </div>
+    </div>`;
+    document.getElementById('frontMessage').appendChild(messageElement);
+    counter++;
+}
+
+
+/**
+ * Called when a response is received.
+ * Removes the 'waiting' class from an element with the corresponding ID.
+ * Replace the Frontend generated message with the backend response message.
+ * 
+ * @param {string} message - The backend response message.
+ */
+function responseReceivedM(message) {
+    id = 'message' + (counter - 1).toString();
+    document.getElementById(id).classList.remove('waiting');
+    id.innerHTML = `
+        <span class="grey">${getTimestamp()}</span> ${username.innerHTML}: <i>${message}</i>
+    `;
+}
