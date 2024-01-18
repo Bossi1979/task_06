@@ -11,6 +11,10 @@
             <div class="chatLoggedUserMessageMain">
               <div class="chatLoggedUserMessageBubble">
                 <i>{{ message.text }}</i>
+                <span class="loggedUserMessageClockTimeContainer">
+                  {{ message.created_time }} Uhr
+                  <span class="material-symbols-outlined loggedUserAllDone">done_all</span>
+                </span>
               </div>
               <div class="loggedUserMessageInfo">
                 <span class="grey">[{{ message.created_at }}]</span>
@@ -23,6 +27,7 @@
             <div class="chatOtherUserMessageMain">
               <div class="chatOtherUserMessageBubble">
                 <i>{{ message.text }}</i>
+                <span style="position: absolute; left: 23px; font-size: 10px; bottom: -4px;">{{ message.created_time }} Uhr</span>
               </div>
               <div class="otherUserMessageInfo">
                 <span class="grey">[{{ message.created_at }}]</span>
@@ -36,8 +41,12 @@
     <div class="divider"></div>
     <form class="messageInput" onsubmit="sendMessage(); return false;" method="POST">
       {% csrf_token %}
-      <input type="text" id="messageInput" name="textmessage" />
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored sendBtn" type="submit">Abschicken</button>
+      {% comment %} <input type="text" id="messageInput" name="textmessage" /> {% endcomment %}
+      <div class="mdl-textfield mdl-js-textfield">
+        <input class="mdl-textfield__input" type="text" id="messageInput" name="textmessage" maxlength="300" onkeyup="validateSendMessageBtn()"/>
+        <label class="mdl-textfield__label" for="textmessage">Nachricht...</label>
+      </div>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored sendBtn" type="submit" style="min-width: unset;" id="sendMessageBtn" disabled="true"><span class="material-symbols-outlined">send</span></button>
     </form>
   </div>
 {% endblock %}

@@ -159,6 +159,7 @@ let json;
  * @returns {Promise<void>} A Promise that resolves once the message is sent.
  */
 async function sendMessage() {
+    document.getElementById('sendMessageBtn').disabled = true;
     let message = messageInput.value;
     addNewMessage(message);
     let fd = getFormDataM();
@@ -214,14 +215,27 @@ function getTimestamp() {
  */
 function addNewMessage(message) {
     const messageElement = document.createElement('div');
+    const day = new Date();
+    const hours = day.getHours();
+    const minutes = day.getMinutes();
+    const clockString = hours + ':' + minutes;
+
+
     messageElement.innerHTML += `
     <div class="chatLoggedUserMessageOuter">
         <div class="chatLoggedUserMessageMain">
         <div class="chatLoggedUserMessageBubble">
             <i>${message}</i>
+            <span class="loggedUserMessageClockTimeContainer">
+              ${clockString} Uhr 
+              <span class="material-symbols-outlined loggedUserAllDone">
+                done_all
+              </span>
+            </span>
         </div>
         <div class="loggedUserMessageInfo">
-            <span class="grey">[${getTimestamp()}]</span> 
+            <span class="grey">[${getTimestamp()}]</span>
+            <span class="grey">${clockString}]</span> 
             <span style="color: #3F51B5;"><b>${username.innerHTML}</b></span>
         </div>
     </div>`;
@@ -238,9 +252,20 @@ function addNewMessage(message) {
  * @param {string} message - The backend response message.
  */
 function responseReceivedM(message) {
-    id = 'message' + (counter - 1).toString();
-    document.getElementById(id).classList.remove('waiting');
-    id.innerHTML = `
-        <span class="grey">${getTimestamp()}</span> ${username.innerHTML}: <i>${message}</i>
-    `;
+    // id = 'message' + (counter - 1).toString();
+    // document.getElementById(id).classList.remove('waiting');
+    // id.innerHTML = `
+    //     <span class="grey">${getTimestamp()}</span> ${username.innerHTML}: <i>${message}</i>
+    // `;
 }
+
+
+
+function validateSendMessageBtn(){
+    let message = messageInput.value;
+    if (message.trim().length > 0) {
+        document.getElementById('sendMessageBtn').disabled = false;
+    } else {
+        document.getElementById('sendMessageBtn').disabled = true;
+    }
+};
