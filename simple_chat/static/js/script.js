@@ -261,7 +261,7 @@ function responseReceivedM(message) {
 
 
 
-function validateSendMessageBtn(){
+function validateSendMessageBtn() {
     let message = messageInput.value;
     if (message.trim().length > 0) {
         document.getElementById('sendMessageBtn').disabled = false;
@@ -269,3 +269,24 @@ function validateSendMessageBtn(){
         document.getElementById('sendMessageBtn').disabled = true;
     }
 };
+
+
+
+
+
+async function createChannel(){
+    let channelData = new FormData();
+    channelData.append('csrfmiddlewaretoken', await getToken());
+    channelData.append('chat_name', channelName.value);
+    try {
+        responseM = await fetch('/create_chat/', {
+            method: 'POST',
+            body: channelData
+        });
+        let responseChannelname= await responseM.json();
+        let jsonChannelmessage = await JSON.parse(responseChannelname);
+    } catch (e) {
+        console.error('An error occurred', e);
+    }
+
+}

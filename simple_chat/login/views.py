@@ -27,7 +27,7 @@ def login_form(request):
            login(request, user)
            response_data = {
                 'error': 'none',
-                'url': '/chat/',
+                'url': '/dashboard/',
             }
            return JsonResponse(response_data)
        else:

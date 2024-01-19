@@ -24,3 +24,13 @@ def index(request):
         )
         serialized_obj = serializers.serialize("json", [new_message])
         return JsonResponse(serialized_obj[1:-1], safe=False)
+    
+def create_chat(request):
+    if request.method == 'POST':
+        new_chat = Chat.objects.create(
+            created_at=date.today(),
+            chat_name=request.POST["chat_name"],
+        )
+    serialized_obj = serializers.serialize("json", [new_chat])
+    return JsonResponse(serialized_obj[1:-1], safe=False)
+            

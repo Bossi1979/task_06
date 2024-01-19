@@ -8,6 +8,7 @@ from django.conf import settings
 
 class Chat(models.Model):
     created_at = models.DateField(default=date.today)
+    chat_name = models.CharField(max_length=200)
     
     
 class Message(models.Model):

@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+  <div class="dashboardContent">
+    <h1>Dashboard</h1>
+    <button>Create Chat</button>
+  </div>
+
+  <div style="display: flex; position: absolute; justify-content: center; align-items: center; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.4);">
+    <form action="" style="background-color: white;">
+        {% csrf_token %}
+      <h4>Channel erstellen</h4>
+      <div class="mdl-textfield mdl-js-textfield usernameInput">
+        <input class="mdl-textfield__input" type="text" id="channelName" name="channelName"  pattern="[a-zA-Z0-9]+" minlength="5" maxlength="20" required />
+        <label class="mdl-textfield__label" for="channelName">Channelname</label>
+
+        <span class="warningUsername" id="uWarning">Warning</span>
+      </div>
+
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored loginBtn" type="submit" disabled="true" id="sendBtn">
+        Channel erstellen
+      </button>
+    </form>
+  </div>
+{% endblock %}

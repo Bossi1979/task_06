@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from chat.views import index
+from chat.views import index, create_chat
 from login.views import login_form
+from dashboard.views import dashboard
 from register.views import register_form
 from django.contrib.auth.views import LogoutView
 
@@ -26,7 +27,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat/', index),
     path('login/', login_form),
+    path('dashboard/', dashboard),
     path('register/', register_form),
+    path('create_chat/', create_chat),
     path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
     path('', login_form),
 ]
