@@ -1,5 +1,6 @@
 let responseC;
 
+
 /**
  * The function "openChannelCreationMenu" displays the channel creation menu by changing the display
  * style to "flex".
@@ -34,9 +35,7 @@ async function loadChannel(channelId) {
  * to a server endpoint and handling the response.
  */
 async function createChannel() {
-    let channelData = new FormData();
-    channelData.append('csrfmiddlewaretoken', await getToken());
-    channelData.append('chat_name', channelName.value);
+    let channelData = await createChannelData();
     try {
         closeChannelCreationMenu();
         channelName.value = '';
@@ -44,12 +43,23 @@ async function createChannel() {
             method: 'POST',
             body: channelData
         });
-        let responseChannelname = await responseC.json();
-        let jsonChannelmessage = await JSON.parse(responseChannelname);
-        addChannelName(jsonChannelmessage);
+        addChannelName(responseC);
     } catch (e) {
         alert('Der neue Channel konnte nicht erstellt werden!');
     }
+}
+
+
+/**
+ * The function creates a FormData object with a CSRF token and a chat name.
+ * 
+ * @returns a FormData object that contains the CSRF token and the chat name.
+ */
+async function createChannelData(){
+    let channelData = new FormData();
+    channelData.append('csrfmiddlewaretoken', await getToken());
+    channelData.append('chat_name', channelName.value);
+    return channelData;
 }
 
 
@@ -59,7 +69,7 @@ async function createChannel() {
  */
 function checkChannelNameValidity() {
     let enteredName = channelName.value;
-    if (enteredName.trim().length >= 5 && enteredName.length <= 20) {
+    if (nameLengthInLimit(enteredName)) {
         cCWarning.style.display = 'none';
         document.getElementById('channelCBtn').disabled = false;
     } else {
@@ -72,10 +82,27 @@ function checkChannelNameValidity() {
 
 
 /**
+ * The function checks if the length of the entered name, after removing leading and trailing spaces,
+ * is between 5 and 20 characters.
+ * 
+ * @param enteredName - The parameter "enteredName" is a string representing a name that is entered by
+ * the user.
+ * @returns a boolean value. It will return true if the length of the enteredName (after trimming any
+ * leading or trailing whitespace) is greater than or equal to 5 and less than or equal to 20.
+ * Otherwise, it will return false.
+ */
+function nameLengthInLimit(enteredName) {
+    return enteredName.trim().length >= 5 && enteredName.length <= 20;
+}
+
+
+/**
  * The function adds a channel name to a chat list in HTML.
  * 
  * @param channelData - An object containing the data of a channel. It has the following properties:
  */
-async function addChannelName(channelData){
+async function addChannelName(responseC){
+    let responseChannelname = await responseC.json();
+    let channelData = await JSON.parse(responseChannelname);
     chatList.innerHTML += `<span class="mdl-navigation__link"  onclick="loadChannel(${channelData.pk})">${channelData.fields.chat_name}</span>`;
 }

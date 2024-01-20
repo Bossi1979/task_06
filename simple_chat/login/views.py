@@ -36,7 +36,7 @@ def handle_post_request(request):
         login(request, user)
         return JsonResponse({'error': 'none', 'url': '/dashboard/'})
     else:
-        return JsonResponse({'error': '*Incorrect username or password'})
+        return JsonResponse({'error': '*Falscher Benutzername oder Passwort!'})
 
 
 def render_login_page(request, redirect):

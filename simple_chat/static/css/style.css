@@ -15,7 +15,6 @@ body {
     width: 100%;
 }
 
-
 /* Login */
 .loginContent {
     display: flex;
@@ -66,7 +65,6 @@ h4 {
 }
 
 /* login validation Warnings */
-
 .usernameInput {
     position: relative;
 }
@@ -105,17 +103,13 @@ h4 {
     color: crimson;
 }
 
-
-
 /* header */
-
 .logoutBtn {
     color: white;
     width: 20px;
     height: 20px;
     cursor: pointer;
 }
-
 
 .logoutBtn:hover {
     transition: color 150ms ease-in-out;
@@ -406,9 +400,6 @@ h4 {
 }
 
 .channelList{
-    /* height: calc(100% - 52px);
-    overflow: hidden;
-    overflow-y: scroll; */
     cursor: pointer;
 }
 .channelList:hover {

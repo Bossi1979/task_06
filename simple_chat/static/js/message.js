@@ -134,11 +134,21 @@ function responseReceivedFailed(message) {
  */
 function validateSendMessageBtn() {
     let message = messageInput.value;
-    if (message.trim().length > 0) {
-        document.getElementById('sendMessageBtn').disabled = false;
-    } else {
-        document.getElementById('sendMessageBtn').disabled = true;
-    }
+    if (messageLengthNotZero()) document.getElementById('sendMessageBtn').disabled = false;
+    else document.getElementById('sendMessageBtn').disabled = true;
+}
+
+
+/**
+ * The function checks if the length of a message, after removing leading and trailing whitespace, is
+ * greater than zero.
+ * 
+ * @returns a boolean value. It returns true if the length of the trimmed message is greater than 0,
+ * indicating that the message has a non-zero length. It returns false otherwise.
+ */
+function messageLengthNotZero() {
+    let message = messageInput.value;
+    return message.trim().length > 0;
 }
 
 

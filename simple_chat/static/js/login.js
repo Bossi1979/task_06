@@ -19,24 +19,42 @@ async function login() {
  * Handles different actions based on the response status.
  */
 async function responseAction() {
-    if (response.status == 200) await setReceivedFaultMessage();
-    if (response.status == 200 && responseString.error == 'none') window.location.href = responseString.url;
-    else if (response.status == 403) await setFaultMessageUnauthorized();
+    if (responseStatusOK()) await setReceivedFaultMessage();
+    if (responseStatusOK() && noErrorMessage()) window.location.href = responseString.url;
+    else if (forbiddenAccess()) await setFaultMessageUnauthorized();
     else setFaultMessage();
     setResponseValues();
 }
 
 
 /**
- * The function sends a login request using the POST method to the '/login/' endpoint.
+ * The function checks if the response status is equal to 200.
+ * 
+ * @returns a boolean value indicating whether the response status is equal to 200 (OK) or not.
  */
-async function sendLoginRequest() {
-    response = await fetch('/login/', {
-        method: 'POST',
-        body: fd
-    });
+function responseStatusOK() {
+    return response.status == 200;
 }
 
+
+/**
+ * The function checks if the received fault message is equal to 'none' and returns a boolean value.
+ * 
+ * @returns a boolean value. It will return true if the variable `receivedFaultMessage` is equal to the
+ * string 'none', and false otherwise.
+ */
+function noErrorMessage() {
+    return receivedFaultMessage == 'none';
+}
+
+
+/**
+ * The function checks if the response status is 403, indicating forbidden access.
+ * @returns a boolean value, true or false, depending on whether the response status is equal to 403.
+ */
+function forbiddenAccess(){
+    return response.status == 403;
+}
 
 
 /**
@@ -98,7 +116,7 @@ async function logout() {
         });
         window.location.href = response.url;
     } catch (error) {
-        console.log('Fehler: ', error);
+        alert('Fehler beim Ausloggen!');
     }
 }
 
@@ -164,12 +182,34 @@ function disableUsernameWarning() {
 function checkEnteredValuesPassword() {
     mainLoginWarning.innerHTML = '';
     passwordValid = false;
-    const notAllowed = /[<>]/;
     const minLength = 6;
-    if (notAllowed.test(password.value)) setWarningForbiddenSpecialCharacters();
-    else if (password.value.length < minLength) setWarningPasswordToShortLength()
+    if (notAllowedSpecialCharacters()) setWarningForbiddenSpecialCharacters();
+    else if (passwordToShortLength()) setWarningPasswordToShortLength()
     else disablePasswordWarning();
     setBtnDisabledValue();
+}
+
+
+/**
+ * Checks if the password contains special characters that are not allowed.
+ *
+ * @returns {boolean} True if the password contains not allowed special characters, otherwise false.
+ */
+function notAllowedSpecialCharacters() {
+    const notAllowed = /[<>]/;
+    return notAllowed.test(password.value);
+}
+
+
+/**
+ * The function checks if the length of a password is shorter than a specified minimum length.
+ * 
+ * @returns a boolean value indicating whether the length of the password is less than the minimum
+ * length (6 characters) or not.
+ */
+function passwordToShortLength() {
+    const minLength = 6;
+    return password.value.length < minLength;
 }
 
 
