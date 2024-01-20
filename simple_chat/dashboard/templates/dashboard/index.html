@@ -1,5 +1,4 @@
 {% extends 'main.html' %}
-
 {% block content %}
   <div class="dashboardContent">
     {% if username %}
@@ -9,7 +8,6 @@
     {% endif %}
     <p>Wähle einen existierenden Channel aus dem Seitenmenue oder erstelle einen neuen Kanal <a onclick="openChannelCreationMenu()">hier.</a></p>
   </div>
-
   <div style="display: none; position: absolute; justify-content: center; align-items: center; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.4);" id="channelCreationMenu">
     <form onsubmit="createChannel(); return false;" class="loginForm">
         {% csrf_token %}
