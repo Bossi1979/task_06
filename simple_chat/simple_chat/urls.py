@@ -21,15 +21,28 @@ from login.views import login_form
 from dashboard.views import dashboard
 from register.views import register_form
 from django.contrib.auth.views import LogoutView
+from django.shortcuts import redirect
+from django.contrib.auth import logout
+
+
+
+def logout_and_redirect(request):
+    if request.user.is_authenticated:
+        logout(request)
+    return redirect('login_form')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('chat/', index),
-    path('login/', login_form),
+    path('login/', login_form, name='login_form'),
     path('dashboard/', dashboard),
     path('register/', register_form),
     path('create_chat/', create_chat),
     path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
-    path('', login_form),
+    path('', logout_and_redirect),
+    # path('', LogoutView.as_view(next_page='/logout/'), name='logout'),
 ]
+
+
+

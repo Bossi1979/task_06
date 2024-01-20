@@ -27,6 +27,7 @@ def index(request):
             chat=myChat,
             author=request.user,
             receiver=request.user,
+            created_time=request.POST["created_time"],
         )
         serialized_obj = serializers.serialize("json", [new_message])
         return JsonResponse(serialized_obj[1:-1], safe=False)

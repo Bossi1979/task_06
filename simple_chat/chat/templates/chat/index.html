@@ -3,7 +3,7 @@
 {% block content %}
   <div class="chatContent">
     {% if channel_id and channel_name %}
-      <header class="chatHeader">Channel ID: {{ channel_id }} Channel name: {{ channel_name }}</header>
+      <header class="chatHeader">{{ channel_name }}</header>
     {% else %}
       <header class="chatHeader">No channel ID provided.</header>
     {% endif %}
@@ -42,12 +42,13 @@
           </div>
         {% endif %}
       {% endfor %}
+      <div id="scrollMark"></div>
     </div>
     <div class="divider"></div>
     <form class="messageInput" onsubmit="sendMessage( {{ channel_id }} ); return false;" method="POST">
       {% csrf_token %}
       {% comment %} <input type="text" id="messageInput" name="textmessage" /> {% endcomment %}
-      <div class="mdl-textfield mdl-js-textfield">
+      <div class="mdl-textfield mdl-js-textfield messageTextfield">
         <input class="mdl-textfield__input" type="text" id="messageInput" name="textmessage" maxlength="300" onkeyup="validateSendMessageBtn()" />
         <label class="mdl-textfield__label" for="textmessage">Nachricht...</label>
       </div>

@@ -4,6 +4,11 @@ body {
     background-color: #ECEEFE !important;
 }
 
+
+.mainHeader{
+    justify-content: space-between;
+}
+
 .page-content {
     display: flex;
     height: 100%;
@@ -206,8 +211,8 @@ h4 {
     display: flex;
     position: relative;
     text-align: end;
-    background-color: #68C7BA;
-    color: black;
+    background-color: teal;
+    color: white;
     border-top-right-radius: 30px;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
@@ -259,12 +264,20 @@ h4 {
     text-transform: none !important;
 }
 
-/* .messageInput input {
+.messageInput input {
     width: calc(100% - 62px);
-} */
+}
 
-.mdl-textfield {
+.messageTextfield {
     width: 50% !important;
+}
+
+.messageTextfield input {
+    width: 100% !important;
+}
+
+.messageFailed {
+    color: crimson;
 }
 
 
@@ -346,4 +359,78 @@ h4 {
 
 ::-webkit-scrollbar {
     width: 0px;
+}
+
+
+/* Channel creation */
+.channelCreationHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px 20px 0px;
+}
+
+.channelCreationHeader span:hover {
+    cursor: pointer;
+    transition: color 300ms ease-in-out;
+    color: red;
+}
+
+.channelCreationBtn {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0px 0px 0px;
+}
+
+#chatList{
+    height: calc(100vh - 130px);
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.channelList{
+    /* height: calc(100% - 52px);
+    overflow: hidden;
+    overflow-y: scroll; */
+    cursor: pointer;
+}
+.channelList:hover {
+    transition: color 300ms ease-in-out;
+    color: #3F51B5 !important;
+}
+
+.channelListRed{
+    cursor: pointer;
+}
+.channelListRed:hover {
+    transition: color 300ms ease-in-out;
+    color: crimson!important;
+}
+
+
+
+/* Dashboard */
+
+.dashboardContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+
+.dashboardContent a {
+    color: #3F51B5;
+    text-decoration: underline;
+    text-decoration-color: #3F51B5;
+    cursor: pointer;
+}
+
+
+@media screen and (max-width: 360px) {
+    .loginForm {
+        padding: 5px;
+    }
+    
 }

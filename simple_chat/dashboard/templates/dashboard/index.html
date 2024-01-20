@@ -2,24 +2,30 @@
 
 {% block content %}
   <div class="dashboardContent">
-    <h1>Dashboard</h1>
-    <button onclick="openChannelCreationMenu()">Create Chat</button>
+    {% if username %}
+      <header class="chatHeader">Willkommen {{ username }}!</header>
+    {% else %}
+      <header class="chatHeader">No username.</header>
+    {% endif %}
+    <p>Wähle einen existierenden Channel aus dem Seitenmenue oder erstelle einen neuen Kanal <a onclick="openChannelCreationMenu()">hier.</a></p>
   </div>
 
   <div style="display: none; position: absolute; justify-content: center; align-items: center; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.4);" id="channelCreationMenu">
-    <form onsubmit="createChannel(); return false;" style="background-color: white;">
+    <form onsubmit="createChannel(); return false;" style="background-color: white; display: flex; flex-direction: column; padding: 20px;">
         {% csrf_token %}
-      <h4>Channel erstellen  <span onclick="closeChannelCreationMenu()">Close</span></h4>
+      <h4  class="channelCreationHeader">Channel erstellen  <span onclick="closeChannelCreationMenu()" class="material-symbols-outlined">close</span></h4>
       <div class="mdl-textfield mdl-js-textfield usernameInput">
-        <input class="mdl-textfield__input" type="text" id="channelName" name="channelName"  pattern="[a-zA-Z0-9]+" minlength="5" maxlength="20" required />
+        <input class="mdl-textfield__input" type="text" id="channelName" name="channelName"  minlength="5" maxlength="20"  onkeyup="checkChannelNameValidity()"/>
         <label class="mdl-textfield__label" for="channelName">Channelname</label>
 
-        <span class="warningUsername" id="uWarning">Warning</span>
+        <span class="warningUsername" id="cCWarning">Warning</span>
       </div>
-
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">
-        Channel erstellen
-      </button>
+      <div class="channelCreationBtn">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" disabled="true" id="channelCBtn">
+          Channel erstellen
+        </button>
+      </div>
+      
     </form>
   </div>
 {% endblock %}

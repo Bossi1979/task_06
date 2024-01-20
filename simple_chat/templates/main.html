@@ -13,12 +13,16 @@
     <link rel="icon" type="image/x-icon" href="{% static './img/simple.png' %}" />
     <link rel="stylesheet" href="{% static './css/style.css' %}" />
     <script src="{% static './js/script.js' %}"></script>
-    <script src="{% static './js/login_validation.js' %}"></script>
+    <script src="{% static './js/login.js' %}"></script>
+    <script src="{% static './js/channel.js' %}"></script>
+    <script src="{% static './js/message.js' %}"></script>
     <script src="{% static './js/register_validation.js' %}"></script>
   </head>
   <body>
     <div class="loading" id="loading">
-      <p>Wird geladen <span class="loadingPoint1">.</span><span class="loadingPoint2">.</span><span class="loadingPoint3">.</span></p>
+      <p>
+        Wird geladen <span class="loadingPoint1">.</span><span class="loadingPoint2">.</span><span class="loadingPoint3">.</span>
+      </p>
       <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
     </div>
     <!-- Always shows a header, even in smaller screens. -->
@@ -26,30 +30,25 @@
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       {% if request.user.is_authenticated %}
         <header class="mdl-layout__header">
-          <div class="mdl-layout__header-row" style="justify-content: space-between;">
+          <div class="mdl-layout__header-row mainHeader">
             <!-- Title -->
             <span class="mdl-layout-title title"><img src="{% static './img/simple.png' %}" style="height: 20px; width: 20px;" />WhatsChats</span>
-            <span class="mdl-layout-title" >Welcome, <span id="username">{{ request.user.username }}</span> !</span>
-            <!-- Add spacer, to align navigation to the right -->
-            {% comment %} <div class="mdl-layout-spacer"></div>
-            <!-- Navigation. We hide it in small screens. -->
-            <nav class="mdl-navigation mdl-layout--large-screen-only">
-              <a class="mdl-navigation__link" href="">Link</a>
-              <a class="mdl-navigation__link" href="">Link</a>
-              <a class="mdl-navigation__link" href="">Link</a>
-              <a class="mdl-navigation__link" href="">Link</a>
-            </nav> {% endcomment %}
+            {% comment %} <span class="mdl-layout-title">Welcome, <span id="username">{{ request.user.username }}</span> !</span> {% endcomment %}
             {% csrf_token %}
             <span class="material-symbols-outlined logoutBtn" onclick="logout()">logout</span>
           </div>
         </header>
 
         <div class="mdl-layout__drawer">
-          <span class="mdl-layout-title"><img src="{% static './img/simple.png' %}" style="height: 20px; width: 20px;" />WhatsChats</span></span>
-          <nav class="mdl-navigation">
-            {% for chat in chats %}
-            <span class="mdl-navigation__link"  onclick="loadChannel({{ chat.id }})">{{ chat.chat_name }}</span>
-            {% endfor %}
+          <span class="mdl-layout-title"><img src="{% static './img/simple.png' %}" style="height: 20px; width: 20px;" />WhatsChats</span>
+          <nav class="mdl-navigation" style="justify-content: space-between; ">
+            <div id="chatList">
+              {% for chat in chats %}
+                <span class="mdl-navigation__link channelList" onclick="loadChannel({{ chat.id }})">{{ chat.chat_name }}</span>
+              {% endfor %}
+            </div>
+
+            <a class="mdl-navigation__link channelListRed" href="/dashboard">zurück zur Startseite</a>
           </nav>
         </div>
       {% endif %}
