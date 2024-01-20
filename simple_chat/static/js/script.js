@@ -1,5 +1,5 @@
-fd = new FormData();
-response = 'unset';
+let fd = new FormData();
+let response = 'unset';
 let responseStatus = 999;
 let responseStatusText = 'unset';
 let receivedFaultMessage = 'unset';
@@ -8,6 +8,8 @@ let passwordValid = false;
 let usernameValid = false;
 let loginDisabled = true;
 let mainFaultMessage = '';
+
+let setChannelId;
 
 
 /**
@@ -158,7 +160,8 @@ let json;
  * 
  * @returns {Promise<void>} A Promise that resolves once the message is sent.
  */
-async function sendMessage() {
+async function sendMessage(channel_id) {
+    setChannelId = channel_id;
     document.getElementById('sendMessageBtn').disabled = true;
     let message = messageInput.value;
     addNewMessage(message);
@@ -187,6 +190,7 @@ function getFormDataM() {
     tokenField = document.getElementsByName('csrfmiddlewaretoken');
     let token = tokenField[0].value;
     data.append('textmessage', messageInput.value);
+    data.append('channel_id', setChannelId);
     data.append('csrfmiddlewaretoken', token);
     messageInput.value = '';
     return data;
@@ -279,14 +283,90 @@ async function createChannel(){
     channelData.append('csrfmiddlewaretoken', await getToken());
     channelData.append('chat_name', channelName.value);
     try {
+        closeChannelCreationMenu();
+        channelName.value = '';
         responseM = await fetch('/create_chat/', {
             method: 'POST',
             body: channelData
         });
         let responseChannelname= await responseM.json();
         let jsonChannelmessage = await JSON.parse(responseChannelname);
+        console.log(jsonChannelmessage);
     } catch (e) {
         console.error('An error occurred', e);
     }
 
+}
+
+
+function openChannelCreationMenu() {
+    document.getElementById('channelCreationMenu').style.display = 'flex';
+}
+
+function closeChannelCreationMenu() {
+    document.getElementById('channelCreationMenu').style.display = 'none';
+}
+
+
+async function loadChannel(channelId) {
+    
+    window.location.href = `http://127.0.0.1:8000/chat/?channel_id=${channelId}`;
+    setChannelId = channelId;
+    // try {
+    //     const response = await fetch(`/chat/?channel_id=${channelId}`, {
+    //         method: 'GET',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'X-CSRFToken': await getToken(),
+    //         },
+    //     });
+
+    //     if (!response.ok) {
+    //         throw new Error(`Server returned ${response.status} ${response.statusText}`);
+    //     }
+
+    //     // Angenommen, die Antwort enthält HTML-Inhalt; aktualisiere den Inhalt der aktuellen Seite
+    //     const responseData = await response.text();
+    //     // document.body.innerHTML = responseData;
+    // } catch (e) {
+    //     console.error('Ein Fehler ist aufgetreten', e);
+    // }
+}
+
+
+async function ladeChatMitIdVier() {
+    // Erstelle eine FormData-Instanz und füge den Parameter channel_id=4 hinzu
+    const formData = new FormData();
+    formData.append('channel_id', 4);
+
+    // Ersetze dies durch deinen CSRF-Token-Wert
+    const csrfToken = await getToken();
+
+    // Ersetze die URL durch deine tatsächliche Django-URL
+    const url = '/chat/';
+
+    // Verwende Fetch, um die Daten zu laden
+    fetch(url + new URLSearchParams(formData), {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            // Füge deinen CSRF-Token zum Header hinzu
+            'X-CSRFToken': csrfToken,
+        },
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Fehler beim Laden des Chats');
+        }
+        return response.json();
+    })
+    .then(data => {
+        // Die Antwort enthält die geladenen Chat-Nachrichten
+        console.log(data);
+        // Hier kannst du den HTML-Code aktualisieren, um die Nachrichten anzuzeigen
+        // z.B. document.getElementById('chat-container').innerHTML = data;
+    })
+    .catch(error => {
+        console.error('Fehler beim Laden des Chats:', error);
+    });
 }

@@ -47,10 +47,9 @@
         <div class="mdl-layout__drawer">
           <span class="mdl-layout-title"><img src="{% static './img/simple.png' %}" style="height: 20px; width: 20px;" />WhatsChats</span></span>
           <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
-            <a class="mdl-navigation__link" href="">Link</a>
+            {% for chat in chats %}
+            <span class="mdl-navigation__link"  onclick="loadChannel({{ chat.id }})">{{ chat.chat_name }}</span>
+            {% endfor %}
           </nav>
         </div>
       {% endif %}

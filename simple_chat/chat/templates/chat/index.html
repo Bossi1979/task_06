@@ -2,7 +2,12 @@
 
 {% block content %}
   <div class="chatContent">
-    <header class="chatHeader">Channel XYZ</header>
+    {% if channel_id and channel_name %}
+      <header class="chatHeader">Channel ID: {{ channel_id }} Channel name: {{ channel_name }}</header>
+    {% else %}
+      <header class="chatHeader">No channel ID provided.</header>
+    {% endif %}
+    {% comment %} <header class="chatHeader">Channel XYZ</header> {% endcomment %}
     <div class="divider"></div>
     <div class="chatMessages" id="frontMessage">
       {% for message in messages %}
@@ -39,11 +44,11 @@
       {% endfor %}
     </div>
     <div class="divider"></div>
-    <form class="messageInput" onsubmit="sendMessage(); return false;" method="POST">
+    <form class="messageInput" onsubmit="sendMessage( {{ channel_id }} ); return false;" method="POST">
       {% csrf_token %}
       {% comment %} <input type="text" id="messageInput" name="textmessage" /> {% endcomment %}
       <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="text" id="messageInput" name="textmessage" maxlength="300" onkeyup="validateSendMessageBtn()"/>
+        <input class="mdl-textfield__input" type="text" id="messageInput" name="textmessage" maxlength="300" onkeyup="validateSendMessageBtn()" />
         <label class="mdl-textfield__label" for="textmessage">Nachricht...</label>
       </div>
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored sendBtn" type="submit" style="min-width: unset;" id="sendMessageBtn" disabled="true"><span class="material-symbols-outlined">send</span></button>

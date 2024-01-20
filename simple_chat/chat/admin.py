@@ -6,7 +6,7 @@ from .models import Chat
 
 # Ansicht in der Admin Console als Tabelle:
 class MessageAdmin(admin.ModelAdmin):    
-    fields = ('chat','text','created_at', 'created_time', 'author', 'receiver')    
+    fields = ('chat', 'text','created_at', 'created_time', 'author', 'receiver')    
     list_display = ('created_at', 'author', 'created_time', 'text', 'receiver')    
     search_fields = ('text',)# Register your models here.admin.site.register(Message, MessageAdmin)Copyright © 2022 Developer Akademie GmbH
     
