@@ -25,7 +25,6 @@ from django.shortcuts import redirect
 from django.contrib.auth import logout
 
 
-
 def logout_and_redirect(request):
     if request.user.is_authenticated:
         logout(request)
@@ -41,7 +40,6 @@ urlpatterns = [
     path('create_chat/', create_chat),
     path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
     path('', logout_and_redirect),
-    # path('', LogoutView.as_view(next_page='/logout/'), name='logout'),
 ]
 
 

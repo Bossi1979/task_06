@@ -227,6 +227,13 @@ h4 {
     bottom: -4px;
 }
 
+.otherUserMessageClockTimeContainer {
+    position: absolute; 
+    left: 23px; 
+    font-size: 10px; 
+    bottom: -4px;
+}
+
 .loggedUserAllDone {
     font-size: 10px;
     color: aqua;
@@ -361,8 +368,17 @@ h4 {
     width: 0px;
 }
 
-
 /* Channel creation */
+.channelCreationContainer {
+    display: none; 
+    position: absolute; 
+    justify-content: center; 
+    align-items: center; 
+    width: 100vw; 
+    height: 100vh; 
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
 .channelCreationHeader {
     display: flex;
     justify-content: space-between;

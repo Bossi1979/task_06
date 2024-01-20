@@ -33,7 +33,7 @@
           <div class="mdl-layout__header-row mainHeader">
             <!-- Title -->
             <span class="mdl-layout-title title"><img src="{% static './img/simple.png' %}" style="height: 20px; width: 20px;" />WhatsChats</span>
-            {% comment %} <span class="mdl-layout-title">Welcome, <span id="username">{{ request.user.username }}</span> !</span> {% endcomment %}
+            <span class="mdl-layout-title" style="width: 0px; overflow: hidden;">Welcome, <span id="username">{{ request.user.username }}</span> !</span>
             {% csrf_token %}
             <span class="material-symbols-outlined logoutBtn" onclick="logout()">logout</span>
           </div>
