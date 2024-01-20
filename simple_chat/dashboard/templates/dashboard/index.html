@@ -11,7 +11,7 @@
   </div>
 
   <div style="display: none; position: absolute; justify-content: center; align-items: center; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.4);" id="channelCreationMenu">
-    <form onsubmit="createChannel(); return false;" style="background-color: white; display: flex; flex-direction: column; padding: 20px;">
+    <form onsubmit="createChannel(); return false;" class="loginForm">
         {% csrf_token %}
       <h4  class="channelCreationHeader">Channel erstellen  <span onclick="closeChannelCreationMenu()" class="material-symbols-outlined">close</span></h4>
       <div class="mdl-textfield mdl-js-textfield usernameInput">
