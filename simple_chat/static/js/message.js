@@ -18,7 +18,6 @@ async function sendMessage(channel_id) {
     const clockString = await createClockString();
     addNewMessage(message, clockString);
     let fd = getFormDataM(clockString);
-    debugger;
     try {
         responseM = await fetch('/chat/', {
             method: 'POST',
