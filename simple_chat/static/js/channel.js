@@ -1,21 +1,38 @@
 let responseC;
 
+/**
+ * The function "openChannelCreationMenu" displays the channel creation menu by changing the display
+ * style to "flex".
+ */
 function openChannelCreationMenu() {
     document.getElementById('channelCreationMenu').style.display = 'flex';
 }
 
+/**
+ * The function closeChannelCreationMenu clears the value of a channel name input field and hides a
+ * channel creation menu.
+ */
 function closeChannelCreationMenu() {
     channelName.value = '';
     document.getElementById('channelCreationMenu').style.display = 'none';
-
 }
 
 
+/**
+ * The function `loadChannel` redirects the user to a chat page with the specified channel ID.
+ * 
+ * @param channelId - The channelId parameter is the unique identifier of a channel. It is used to
+ * specify which channel to load in the chat application.
+ */
 async function loadChannel(channelId) {
     window.location.href = `http://127.0.0.1:8000/chat/?channel_id=${channelId}`;
 }
 
 
+/**
+ * The above function is an asynchronous function that creates a new channel by sending a POST request
+ * to a server endpoint and handling the response.
+ */
 async function createChannel() {
     let channelData = new FormData();
     channelData.append('csrfmiddlewaretoken', await getToken());
@@ -36,6 +53,10 @@ async function createChannel() {
 }
 
 
+/**
+ * The function checks if the entered channel name is valid by ensuring it has a length between 5 and
+ * 20 characters.
+ */
 function checkChannelNameValidity() {
     let enteredName = channelName.value;
     if (enteredName.trim().length >= 5 && enteredName.length <= 20) {
@@ -50,6 +71,11 @@ function checkChannelNameValidity() {
 }
 
 
+/**
+ * The function adds a channel name to a chat list in HTML.
+ * 
+ * @param channelData - An object containing the data of a channel. It has the following properties:
+ */
 async function addChannelName(channelData){
     chatList.innerHTML += `<span class="mdl-navigation__link"  onclick="loadChannel(${channelData.pk})">${channelData.fields.chat_name}</span>`;
 }

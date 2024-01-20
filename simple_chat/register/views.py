@@ -36,11 +36,7 @@ def handle_post_request(request):
     if is_valid_registration(username, password, confirm_password):
         return create_user_and_redirect(request, username, password)
     else:
-        return render(
-            request,
-            'register/index.html',
-            {"error": "Passwords do not match or username is empty"},
-        )
+        return render(request, 'register/index.html', {"error": "Passwords do not match or username is empty"})
 
 
 def is_valid_registration(username, password, confirm_password):
@@ -61,18 +57,10 @@ def create_user_and_redirect(request, username, password):
         - Redirects to the login page upon successful user creation, renders the registration page with an error message otherwise.
     """
     if User.objects.filter(username=username).exists():
-        return render(
-            request,
-            'register/index.html',
-            {"error": "Username already exists"},
-        )
+        return render(request, 'register/index.html', {"error": "Username already exists"})
     else:
         user = User.objects.create_user(username=username, password=password)
         if user:
             return HttpResponseRedirect("/login/")
         else:
-            return render(
-                request,
-                'register/index.html',
-                {"error": "Failed to create user"},
-            )
+            return render(request,'register/index.html', {"error": "Failed to create user"})

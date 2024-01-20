@@ -1,7 +1,5 @@
 /**
  * Performs asynchronous login actions.
- * 
- * @returns {Promise<void>}
  */
 async function login() {
     activatedLoadingScreen();
@@ -19,8 +17,6 @@ async function login() {
 
 /**
  * Handles different actions based on the response status.
- * 
- * @returns {Promise<void>}
  */
 async function responseAction() {
     if (response.status == 200) await setReceivedFaultMessage();
@@ -33,8 +29,6 @@ async function responseAction() {
 
 /**
  * The function sends a login request using the POST method to the '/login/' endpoint.
- * 
- * @returns {Promise<void>}
  */
 async function sendLoginRequest() {
     response = await fetch('/login/', {
@@ -48,8 +42,6 @@ async function sendLoginRequest() {
 /**
  * The above code contains various functions related to handling responses, creating form data,
  * validating login form inputs, and displaying error messages.
- * 
- * @returns {Promise<void>}
  */
 async function resetResponseValues() {
     response = 'unset';
@@ -63,8 +55,6 @@ async function resetResponseValues() {
 /**
  * The above code snippet contains JavaScript functions related to handling responses, creating form
  * data, logging out, and retrieving a CSRF token.
- * 
- * @returns {Promise<void>}
  */
 async function setResponseValues() {
     responseStatus = response.status;
@@ -75,8 +65,6 @@ async function setResponseValues() {
 /**
  * The function "setReceivedFaultMessage" asynchronously sets the value of the "receivedFaultMessage"
  * variable by extracting the "error" property from the JSON response.
- * 
- * @returns {Promise<void>}
  */
 async function setReceivedFaultMessage() {
     responseString = await response.json();
@@ -86,8 +74,6 @@ async function setReceivedFaultMessage() {
 
 /**
  * The function creates a FormData object and appends CSRF token, username, and password values to it.
- * 
- * @returns {Promise<void>}
  */
 async function createFormData() {
     fd = new FormData();
@@ -101,8 +87,6 @@ async function createFormData() {
  * The above function is an asynchronous JavaScript function that logs the user out by sending a POST
  * request to the '/logout/' endpoint with a CSRF token and then redirects the user to the response
  * URL.
- * 
- * @returns {Promise<void>}
  */
 async function logout() {
     fd = new FormData();
@@ -122,8 +106,6 @@ async function logout() {
 
 /**
  * The function `getToken` retrieves the value of a CSRF token from a form field.
- * 
- * @returns The value of the CSRF token.
  */
 async function getToken() {
     let tokenField = document.getElementsByName('csrfmiddlewaretoken');
@@ -135,8 +117,6 @@ async function getToken() {
 /**
  * The function checks if the entered username is valid by ensuring it does not contain special
  * characters and is at least 5 characters long.
- * 
- * @ returns {void}
  */
 function checkEnteredValuesUsername() {
     mainLoginWarning.innerHTML = '';
@@ -152,8 +132,6 @@ function checkEnteredValuesUsername() {
 
 /**
  * The function sets a warning message for the username field if it contains special characters.
- * 
- * @ returns {void}
  */
 function setWarningUsernameSpecialCharacters() {
     uWarning.style.display = 'flex';
@@ -163,8 +141,6 @@ function setWarningUsernameSpecialCharacters() {
 
 /**
  * The function sets a warning message for the username field if it is too short.
- * 
- * @ returns {void}
  */
 function setWarningUsernameToShortLength() {
     uWarning.style.display = 'flex';
@@ -174,8 +150,6 @@ function setWarningUsernameToShortLength() {
 
 /**
  * The function disables the display of a warning message for invalid usernames.
- * 
- * @ returns {void}
  */
 function disableUsernameWarning() {
     uWarning.style.display = 'none';
@@ -186,8 +160,6 @@ function disableUsernameWarning() {
 /**
  * The function checks if the entered password meets certain criteria and displays a warning message if
  * it doesn't.
- * 
- * @ returns {void}
  */
 function checkEnteredValuesPassword() {
     mainLoginWarning.innerHTML = '';
@@ -203,8 +175,6 @@ function checkEnteredValuesPassword() {
 
 /**
  * The function sets a warning message and displays it if the special characters < or > are used.
- * 
- * @ returns {void}
  */
 function setWarningForbiddenSpecialCharacters() {
     pWarning.style.display = 'flex';
@@ -214,8 +184,6 @@ function setWarningForbiddenSpecialCharacters() {
 
 /**
  * The function sets a warning message to be displayed if the password entered is too short.
- * 
- * @ returns {void}
  */
 function setWarningPasswordToShortLength() {
     pWarning.style.display = 'flex';
@@ -226,8 +194,6 @@ function setWarningPasswordToShortLength() {
 /**
  * The function disables the display of a password warning and sets a variable to indicate that the
  * password is valid.
- * 
- * @ returns {void}
  */
 function disablePasswordWarning() {
     pWarning.style.display = 'none';
@@ -237,8 +203,6 @@ function disablePasswordWarning() {
 
 /**
  * The function sets the disabled value of a button based on the validity of a username and password.
- * 
- * @ returns {void}
  */
 function setBtnDisabledValue() {
     if (usernameValid && passwordValid) loginDisabled = false;
@@ -250,8 +214,6 @@ function setBtnDisabledValue() {
 /**
  * The function "activatedLoadingScreen" displays the loading screen by setting the style of the
  * loading element to "display: flex".
- * 
- * @ returns {void}
  */
 function activatedLoadingScreen() {
     loading.style = 'display: flex';
@@ -261,8 +223,6 @@ function activatedLoadingScreen() {
 /**
  * The function "deactivatedLoadingScreen" hides the loading screen by setting the display property to
  * "none".
- * 
- * @ returns {void}
  */
 function deactivatedLoadingScreen() {
     loading.style = 'display: none';
@@ -272,8 +232,6 @@ function deactivatedLoadingScreen() {
 /**
  * The function "resetForm" resets the values of the username and password fields and disables the send
  * button.
- * 
- * @ returns {void}
  */
 function resetForm() {
     usernameValid = false;
@@ -286,8 +244,6 @@ function resetForm() {
 
 /**
  * The function sets a fault message for unauthorized access and resets a form.
- * 
- * @ returns {void}
  */
 async function setFaultMessageUnauthorized() {
     resetForm();
@@ -299,8 +255,6 @@ async function setFaultMessageUnauthorized() {
 /**
  * The function sets the main fault message, resets a form, updates a login warning message, and
  * deactivates a loading screen.
- * 
- * @ returns {void}
  */
 function setFaultMessage() {
     mainFaultMessage = receivedFaultMessage;
@@ -313,8 +267,6 @@ function setFaultMessage() {
 /**
  * The function sets a server error fault by resetting a form, displaying a warning message, and
  * deactivating a loading screen.
- * 
- * @ returns {void}
  */
 function setServerErrorFault() {
     resetForm();

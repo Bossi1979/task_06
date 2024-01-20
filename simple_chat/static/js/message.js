@@ -36,6 +36,11 @@ async function sendMessage(channel_id) {
 }
 
 
+/**
+ * The function creates a string representing the current time in the format "HH:MM".
+ * 
+ * @returns a string representing the current time in the format "HH:MM".
+ */
 async function createClockString() {
     const day = new Date();
     let hours = day.getHours();
@@ -124,7 +129,10 @@ function responseReceivedFailed(message) {
 }
 
 
-
+/**
+ * The function checks if the message input is not empty and enables or disables the send message
+ * button accordingly.
+ */
 function validateSendMessageBtn() {
     let message = messageInput.value;
     if (message.trim().length > 0) {
@@ -135,6 +143,9 @@ function validateSendMessageBtn() {
 }
 
 
+/**
+ * The scrollToBottom function scrolls the page to the bottom smoothly.
+ */
 function scrollToBottom() {
     scrollMark.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
 }
