@@ -7,18 +7,21 @@
       <h4>Konto erstellen</h4>
       <div class="mdl-textfield mdl-js-textfield">
         <input type="hidden" name="redirect" value="{{ redirect }}" autocomplete="off"/>
-        <input class="mdl-textfield__input" type="text" id="sample1" name="username" />
-        <label class="mdl-textfield__label" for="sample1">Benutzername</label>
+        <input class="mdl-textfield__input" type="text" id="rUsername" name="username" onkeyup="rUsernameValidation()" pattern="[a-zA-Z0-9]+" minlength="5" maxlength="20" required/>
+        <label class="mdl-textfield__label" for="username">Benutzername</label>
+        <span class="warningUsername" id="uRWarning">Warning</span>
       </div>
       <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="password" id="sample2" name="password" autocomplete="off" />
-        <label class="mdl-textfield__label" for="sample2">Passwort</label>
+        <input class="mdl-textfield__input" type="password" id="rPassword" name="password" autocomplete="off" onkeyup="passwordValidation()" minlength="6" maxlength="32" required/>
+        <label class="mdl-textfield__label" for="password">Passwort</label>
+        <span class="warningPassword" id="rPWarning">Warning</span>
       </div>
       <div class="mdl-textfield mdl-js-textfield">
-        <input class="mdl-textfield__input" type="password" id="sample3" name="c_password" autocomplete="off" />
-        <label class="mdl-textfield__label" for="sample3">Passwort bestätigen</label>
+        <input class="mdl-textfield__input" type="password" id="rCPassword" name="c_password" autocomplete="off" onkeyup="confirmPasswordValidation()"  minlength="6" maxlength="32" required onkeyup="confirmPasswordValidation()" id="rCPassword"/>
+        <label class="mdl-textfield__label" for="c_password">Passwort bestätigen</label>
+        <span class="warningPassword" id="rCPWarning">Warning</span>
       </div>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit">Einloggen</button>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" type="submit" id="registerBtn" disabled="true">Registrieren</button>
       <p style="text-align: center;">
         Um zum Login zurück zu gelangen klicken Sie <a href="/login" class="link">hier</a>
       </p>

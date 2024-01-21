@@ -8,13 +8,12 @@
       <div class="mdl-textfield mdl-js-textfield usernameInput">
         <input type="hidden" name="redirect" value="{{ redirect }}" autocomplete="off" />
         <input class="mdl-textfield__input" type="text" id="username" name="username" value="{{ response.username }}" pattern="[a-zA-Z0-9]+" minlength="5" maxlength="20" required onkeyup="checkEnteredValuesUsername()" />
-        <label class="mdl-textfield__label" for="sample1">Benutzername</label>
-
+        <label class="mdl-textfield__label" for="username">Benutzername</label>
         <span class="warningUsername" id="uWarning">Warning</span>
       </div>
       <div class="mdl-textfield mdl-js-textfield passwordInput">
-        <input class="mdl-textfield__input" type="password" id="password" name="password" autocomplete="off" minlength="" maxlength="32" required onkeyup="checkEnteredValuesPassword()" />
-        <label class="mdl-textfield__label" for="sample2">Passwort</label>
+        <input class="mdl-textfield__input" type="password" id="password" name="password" autocomplete="off" minlength="6" maxlength="32" required onkeyup="checkEnteredValuesPassword()" />
+        <label class="mdl-textfield__label" for="password">Passwort</label>
         <span class="warningPassword" id="pWarning">Warning</span>
         <span class="mainLoginWarning" id="mainLoginWarning"></span>
       </div>

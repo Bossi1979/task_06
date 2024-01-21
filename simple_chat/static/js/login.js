@@ -142,7 +142,7 @@ function checkEnteredValuesUsername() {
     const allowedCharacters = /[^a-zA-Z0-9\s]/;
     username.value = username.value.trim();
     if (allowedCharacters.test(username.value)) setWarningUsernameSpecialCharacters();
-    else if (username.value.length < 5) setWarningUsernameToShortLength()
+    else if (username.value.length < 5) setWarningUsernameToShortLength();
     else disableUsernameWarning();
     setBtnDisabledValue();
 }
