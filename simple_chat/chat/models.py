@@ -34,8 +34,8 @@ class Message(models.Model):
     created_at = models.DateField(default=date.today)
     created_time = models.CharField(max_length=5)
     chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='chat_message_set', default=None, blank=True, null=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='author_message_set') # wenn der user gelöscht wird, wird auch diese Nachricht gelöscht.
-    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='receiver_message_set') # related name ist die Verknüpfung für unsere Datenbank
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='author_message_set') 
+    receiver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='receiver_message_set')
     
 
     

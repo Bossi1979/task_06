@@ -33,11 +33,11 @@ def logout_and_redirect(request):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('chat/', index),
+    path('chat/', index, name='index'),
     path('login/', login_form, name='login_form'),
-    path('dashboard/', dashboard),
-    path('register/', register_form),
-    path('create_chat/', create_chat),
+    path('dashboard/', dashboard, name='dashboard'),
+    path('register/', register_form, name='register_form'),
+    path('create_chat/', create_chat, name='create_chat'),
     path('logout/', LogoutView.as_view(next_page='/login/'), name='logout'),
     path('', logout_and_redirect),
 ]

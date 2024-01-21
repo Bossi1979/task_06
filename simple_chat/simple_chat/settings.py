@@ -29,6 +29,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# CSRF_TRUSTED_ORIGINS = ['http://localhost:3000']
+# collections.Callable = collections.abc.Callable
+
 
 # Application definition
 
@@ -44,6 +47,7 @@ INSTALLED_APPS = [
     'register',
     'dashboard',
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,3 +135,4 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
