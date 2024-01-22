@@ -1,3 +1,7 @@
+let enteredUsername = '';
+let enteredPassword = '';
+
+
 /**
  * Performs asynchronous login actions.
  */
@@ -20,7 +24,11 @@ async function login() {
  */
 async function responseAction() {
     if (responseStatusOK()) await setReceivedFaultMessage();
-    if (responseStatusOK() && noErrorMessage()) window.location.href = responseString.url;
+    if (responseStatusOK() && noErrorMessage()) {
+        window.location.href = responseString.url;
+        enteredPassword = '';
+        enteredUsername = '';
+    }
     else if (forbiddenAccess()) await setFaultMessageUnauthorized();
     else setFaultMessage();
     setResponseValues();
@@ -94,6 +102,8 @@ async function setReceivedFaultMessage() {
  * The function creates a FormData object and appends CSRF token, username, and password values to it.
  */
 async function createFormData() {
+    enteredUsername = username.value;
+    enteredPassword = password.value;
     fd = new FormData();
     fd.append('csrfmiddlewaretoken', await getToken());
     fd.append('username', username.value);
@@ -276,8 +286,8 @@ function deactivatedLoadingScreen() {
 function resetForm() {
     usernameValid = false;
     passwordValid = false;
-    username.value = '';
-    password.value = '';
+    username.value = enteredUsername;
+    password.value = enteredPassword;
     sendBtn.disabled = true;
 }
 

@@ -8,39 +8,41 @@
     {% endif %}
     {% comment %} <header class="chatHeader">Channel XYZ</header> {% endcomment %}
     <div class="divider"></div>
-    <div class="chatMessages" id="frontMessage">
-      {% for message in messages %}
-        {% if message.author.username == request.user.username %}
-          <div class="chatLoggedUserMessageOuter">
-            <div class="chatLoggedUserMessageMain">
-              <div class="chatLoggedUserMessageBubble">
-                <i>{{ message.text }}</i>
-                <span class="loggedUserMessageClockTimeContainer">
-                  {{ message.created_time }} Uhr
-                  <span class="material-symbols-outlined loggedUserAllDone">done_all</span>
-                </span>
-              </div>
-              <div class="loggedUserMessageInfo">
-                <span class="grey">[{{ message.created_at }}]</span>
-                <span style="color: #3F51B5;"><b>{{ message.author.username }}</b></span>
-              </div>
-            </div>
-          </div>
-        {% elif message.author.username != request.user.username %}
-          <div class="chatOtherUserMessageOuter">
-            <div class="chatOtherUserMessageMain">
-              <div class="chatOtherUserMessageBubble">
-                <i>{{ message.text }}</i>
-                <span style="position: absolute; left: 23px; font-size: 10px; bottom: -4px;">{{ message.created_time }} Uhr</span>
-              </div>
-              <div class="otherUserMessageInfo">
-                <span class="grey">[{{ message.created_at }}]</span>
-                <span style="color: #3F51B5;"><b>{{ message.author.username }}</b></span>
+    <div class="chatMessages">
+      <div id="frontMessage">
+        {% for message in messages %}
+          {% if message.author.username == request.user.username %}
+            <div class="chatLoggedUserMessageOuter">
+              <div class="chatLoggedUserMessageMain">
+                <div class="chatLoggedUserMessageBubble">
+                  <i>{{ message.text }}</i>
+                  <span class="loggedUserMessageClockTimeContainer">
+                    {{ message.created_time }} Uhr
+                    <span class="material-symbols-outlined loggedUserAllDone">done_all</span>
+                  </span>
+                </div>
+                <div class="loggedUserMessageInfo">
+                  <span class="grey">[{{ message.created_at }}]</span>
+                  <span style="color: #3F51B5;"><b>{{ message.author.username }}</b></span>
+                </div>
               </div>
             </div>
-          </div>
-        {% endif %}
-      {% endfor %}
+          {% elif message.author.username != request.user.username %}
+            <div class="chatOtherUserMessageOuter">
+              <div class="chatOtherUserMessageMain">
+                <div class="chatOtherUserMessageBubble">
+                  <i>{{ message.text }}</i>
+                  <span style="position: absolute; left: 23px; font-size: 10px; bottom: -4px;">{{ message.created_time }} Uhr</span>
+                </div>
+                <div class="otherUserMessageInfo">
+                  <span class="grey">[{{ message.created_at }}]</span>
+                  <span style="color: #3F51B5;"><b>{{ message.author.username }}</b></span>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
       <div id="scrollMark"></div>
     </div>
     <div class="divider"></div>

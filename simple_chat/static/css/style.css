@@ -71,7 +71,7 @@ h4 {
 
 .warningUsername {
     display: none;
-    font-size: 10px;
+    font-size: 11px;
     position: absolute;
     color: crimson;
 }
@@ -82,7 +82,7 @@ h4 {
 
 .warningPassword {
     display: none;
-    font-size: 10px;
+    font-size: 11px;
     position: absolute;
     color: crimson;
 }
@@ -97,7 +97,7 @@ h4 {
 
 .mainLoginWarning {
     display: flex;
-    font-size: 10px;
+    font-size: 11px;
     top: 66px;
     position: absolute;
     color: crimson;

@@ -104,5 +104,6 @@ function nameLengthInLimit(enteredName) {
 async function addChannelName(responseC){
     let responseChannelname = await responseC.json();
     let channelData = await JSON.parse(responseChannelname);
-    chatList.innerHTML += `<span class="mdl-navigation__link"  onclick="loadChannel(${channelData.pk})">${channelData.fields.chat_name}</span>`;
+    chatList.innerHTML += `<span class="mdl-navigation__link channelList"  onclick="loadChannel(${channelData.pk})">${channelData.fields.chat_name}</span>`;
+    await loadChannel(channelData.pk);
 }

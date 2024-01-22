@@ -3,3 +3,6 @@
 
 # Ignore Database
 *.sqlite3
+
+# Ignore up.bat
+*.bat
